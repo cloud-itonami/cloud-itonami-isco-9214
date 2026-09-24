@@ -1,0 +1,35 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a site scheduling/logistics coordination robot
+;; performs crew scheduling, planting/maintenance logging and
+;; plants/soil/tool-supplies procurement coordination for a garden /
+;; horticultural-site crew (ISCO 9214). It never performs garden work. Its
+;; physical work is the supplies logistics: carrying delivered compost/soil
+;; bags up the garden slope to the beds, and supplying water to the beds
+;; through a garden hose from the mains tap.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-9214"
+ :cases
+ [{:id :compost-bags-up-garden-slope
+   :kind :transport
+   :procedure "tracked garden barrow robot carries 80 kg of compost/soil bags 40 m up a grass slope to the planting beds"
+   :params {:mass-kg 60.0 :payload-kg 80.0 :distance-m 40.0 :v-max-mps 0.8 :a-max-mps2 0.4
+            :brake-decel-mps2 0.6 :drive-force-n 400.0 :crr 0.10
+            :cog-height-m 0.35 :support-half-length-m 0.35 :payload-cog-height-m 0.55
+            :max-time-s 1200.0}
+   :sweep {:param :slope-deg :values [0.0 5.0 10.0 15.0 20.0]}
+   :quantity :cycle-time-s
+   :limit {:max 90.0 :basis "estimate: one bag run while the crew plants one bed section"}
+   :boundary {:lo 0.0 :hi 30.0}}
+  {:id :bed-watering-hose
+   :kind :pipe-flow
+   :procedure "water the beds through a 13 mm (1/2 inch) garden hose from the mains tap, hose length varied to reach the far beds"
+   :params {:q-m3s 0.0003 :diameter-m 0.013 :roughness-m 1.5e-6 :pump-efficiency 1.0 :elevation-m 3.0}
+   :sweep {:param :length-m :values [10.0 20.0 30.0 50.0 80.0]}
+   :quantity :head-m
+   :limit {:max 30.0 :basis "estimate: household mains pressure of about 3 bar available at the tap"}
+   :boundary {:lo 5.0 :hi 150.0}}]}
