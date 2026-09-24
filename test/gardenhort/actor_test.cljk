@@ -1,5 +1,5 @@
 (ns gardenhort.actor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [gardenhort.actor :as actor]
             [gardenhort.store :as store]))
 
