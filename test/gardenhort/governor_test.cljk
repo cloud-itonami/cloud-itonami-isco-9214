@@ -1,5 +1,5 @@
 (ns gardenhort.governor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [gardenhort.store :as store]
             [gardenhort.advisor :as advisor]
             [gardenhort.governor :as governor]))
