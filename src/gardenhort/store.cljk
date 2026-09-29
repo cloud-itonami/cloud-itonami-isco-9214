@@ -1,7 +1,7 @@
 (ns gardenhort.store
   "SSoT for the ISCO-08 9214 garden and horticultural labourer scheduling/
   logistics coordination actor (itonami actor pattern, ADR-2607121000 /
-  CLAUDE.md Actors section; README's 'Robotics premise' — a site
+  AGENTS.md Actors section; README's 'Robotics premise' — a site
   scheduling/logistics coordination robot performs crew scheduling,
   planting/maintenance-log/progress-record logging and plants/soil/tool-
   supplies procurement coordination for a garden/horticultural-site crew
